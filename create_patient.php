@@ -1,165 +1,378 @@
-<?
-include('include/chk_auth.php');
-//include('../include/stcnn.php');
-include('dbconnect.php');
+<?php
+session_start();
 
-if ($_POST['submit'] == 'Create'){
-	$sql = "insert into patient (firstname, lastname, username, password, email, gender, dob) values (";
-	$sql .= "'" . $_POST['firstname'] . "'";
-	$sql .= ",'" . $_POST['lastname'] . "'";
-	$sql .= ",'" . $_POST['username'] . "'";
-	$sql .= ",'" . md5($_POST['password']) . "'";
-	$sql .= ",'" . $_POST['email'] . "'";
-	$sql .= ",'" . $_POST['gender'] . "'";
-	$sql .= ",'" . $_POST['dob'] . "'";
-	$sql .= ")";
-	mysqli_query($conn, $sql);
 
-	$pid = mysqli_insert_id($conn);
-	$side = $_POST['side'];
-	$is_abf = 'y';
+require_once "dbconnect.php";
+$cuss_date = Date('Y/m/d');
+$cmd = getIsset("__cmd");
 
-	$angles = array('90', '120', '150');
+$firstname = getIsset("firstname");
+$lastname = getIsset("lastname");
+$username = getIsset("username");
+$password = getIsset("password");
+$email = getIsset("email");
+$gender = getIsset("gender");
+$side = getIsset("side");
+$dob = getIsset("dob");
+$error = false;
 
-	foreach ($angles as $angle){
-		$sql = "insert into task (pid, date, side, target_angle, number_of_round, is_abf, status) values(";
-		$sql .= "'" . $pid . "'";
-		$sql .= ",'2015-01-30'";
-		$sql .= ",'" . $side . "'";
-		$sql .= ",'" . $angle . "'";
-		$sql .= ",'10'";
-		$sql .= ",'" . $is_abf . "'";
-		$sql .= ",'c'";
-		$sql .= ")";
-		mysqli_query($conn, $sql);
-	}
+if ($cmd == "create") {
 
-	$is_abf = 'n';
-	foreach ($angles as $angle){
-		$sql = "insert into task (pid, date, side, target_angle, number_of_round, is_abf, status) values(";
-		$sql .= "'" . $pid . "'";
-		$sql .= ",'2015-01-30'";
-		$sql .= ",'" . $side . "'";
-		$sql .= ",'" . $angle . "'";
-		$sql .= ",'10'";
-		$sql .= ",'" . $is_abf . "'";
-		$sql .= ",'c'";
-		$sql .= ")";
-		mysqli_query($conn, $sql);
-	}
+    $value = array(
+        "firstname" => $firstname
+    , "lastname" => $lastname
+    , "username" => $username
+    , "password" => md5($password)
+    , "email" => $email
+    , "gender" => $gender
+    , "dob" => $dob
+    );
 
-	header('Location: select_patient.php');
-	exit();
-} else
-{
-	echo 'Pls select and submit';
+    $chk_insert = $conn->select('patient', array('username' => $username));
+    if ($chk_insert == null) {
+        $create_result = $conn->create("patient", $value);
+        if ($create_result) {
+            $angles = array('90', '120', '150');
+            $pid = $conn->getLastInsertId();
+            foreach ($angles as $angle) {
+
+                $value_1 = array(
+                    "pid" => $pid
+                , "date" => $cuss_date
+                , "side" => $side
+                , "target_angle" => $angle
+                , "number_of_round" => '10'
+                , "is_abf" => 'n'
+                , "status" => 'c'
+                );
+
+                $value_2 = array(
+                    "pid" => $pid
+                , "date" => $cuss_date
+                , "side" => $side
+                , "target_angle" => $angle
+                , "number_of_round" => '10'
+                , "is_abf" => 'y'
+                , "status" => 'c'
+                );
+                $create_result_task1 = $conn->create("task", $value_1);
+                $create_result_task2 = $conn->create("task", $value_2);
+                if (!$create_result_task1 || !$create_result_task2) {
+                    $error = true;
+                }
+
+            }
+
+        }else{
+            $error = true;
+        }
+
+
+        if (!$error) {
+            header('Location: select_patient.php');
+            exit();
+        } else {
+            echo "<script>alert('Error for Create Patient!! ');</script>";
+        }
+
+
+    } else {
+        echo "<script>alert('Username is Duplicate!! ');</script>";
+    }
+
 }
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>iJoint - Create Patient</title>
-	<meta charset="UTF-8">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
-	<link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" type="text/css" href="css/create_task.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.5 -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+    <!-- Font Awesome Icons -->
+    <link href="dist/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    <!-- Ionicons -->
+    <!--    <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />-->
+    <!-- Theme style -->
+    <link href="dist/css/AdminLTE.css" rel="stylesheet" type="text/css"/>
+    <link href="Styles/pagerStyle.css" rel="stylesheet" type="text/css"/>
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link href="dist/css/skins/_all-skins.css" rel="stylesheet" type="text/css"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" type="text/css" href="css/select_patient.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.datetimepicker.css">
+
+
 </head>
+<body class="skin-blue sidebar-mini">
+<div class="wrapper">
+    <?php include "navbar.php" ?>
+    <?php include "sidebar.php" ?>
+    <div class="content-wrapper  skin-blue ">
+        <form id="form_data" name="form_data" method="post" action="create_patient.php">
 
-<body>
-	<div class="container">
-		<? include('include/header.php'); ?>
+            <input id="__cmd" name="__cmd" type="hidden" value="">
 
-		<a href="sign_out.php" id="sign_out_btn" class="btn">
-			Sign Out
-		</a>
+            <section class="content">
+                <div class="clr"></div>
+                <div class="col-sm-1"></div>
+                <div class="col-sm-10">
+                    <div class="col-md-12">
+                        <h3 class="box-title">Create New Patient</h3>
+                    </div>
 
-		<div id="create_task">
-			<div class="head">
-				<div class="headline">Create Patient</div>
-				<div class="sub_headline">
-					<a href="select_patient.php">&lt;&lt; Go back to Patients List</a>
-				</div>
-			</div>
-			
-			<form action="" method="post" id="form">
-				<div class="form_row">
-					<div class="label">Username</div>
-					<div class="value">
-						<input type="text" name="username" class="input" />
-					</div>
-				</div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                First Name :
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
 
-				<div class="form_row">
-					<div class="label">Password</div>
-					<div class="value">
-						<input type="text" name="password" class="input" />
-					</div>
-				</div>
 
-				<div class="form_row">
-					<div class="label">First Name</div>
-					<div class="value">
-						<input type="text" name="firstname" class="input" />
-					</div>
-				</div>
+                            <input type="text" name="firstname" id="firstname" class="form-control" value=""
+                                   required="true">
 
-				<div class="form_row">
-					<div class="label">Last Name</div>
-					<div class="value">
-						<input type="text" name="lastname" class="input" />
-					</div>
-				</div>
 
-				<div class="form_row">
-					<div class="label">E-mail</div>
-					<div class="value">
-						<input type="text" name="email" class="input" />
-					</div>
-				</div>
+                        </div>
+                    </div>
 
-				<div class="form_row">
-					<div class="label">Date of Birth</div>
-					<div class="value">
-						<input type="text" name="dob" id="datepicker" value="<?=date('Y/m/d', strtotime('01/01/1990'))?>" class="input" />
-					</div>
-				</div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Last Name :
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <input type="text" name="lastname" id="lastname" class="form-control" value=""
+                                   onblur="trimValue(this);" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                E-mail :
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="email" id="email" class="form-control" value=""
+                                   onblur="trimValue(this);chkEmail(this);" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Date of Birth :
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="dob" id="datepicker" class="form-control"
+                                   value=""
+                                   onblur="trimValue(this);" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Gender :
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
 
-				<div class="form_row">
-					<div class="label">Gender</div>
-					<div class="value" style="padding: 10px 0;">
-						<input type="radio" name="gender" id="male" value="m" checked="checked" /> <label for="male">Male</label> &nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name="gender" id="female" value="f" /> <label for="female">Female</label>
-					</div>
-				</div>
+                            <label class="radio-inline"><input type="radio" name="gender" id="male"
+                                                               value="m">Male</label>
+                            <label class="radio-inline"><input type="radio" name="gender" id="female"
+                                                               value="f">Female</label>
 
-				<div class="form_row">
-					<div class="label">Side</div>
-					<div class="value" style="padding: 10px 0;">
-						<input type="radio" name="side" id="side_l" value="l" checked="checked" /> <label for="side_l">Left</label> &nbsp;&nbsp;&nbsp;&nbsp;
-						<input type="radio" name="side" id="side_r" value="r" /> <label for="side_r">Right</label>
-					</div>
-				</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Side :
+                            </label>
+                        </div>
+                        <div class="col-sm-3">
+                            <label class="radio-inline"><input type="radio" name="side" id="side_l"
+                                                               value="l">Left</label>
+                            <label class="radio-inline"><input type="radio" name="side" id="side_r"
+                                                               value="r">Right</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Username :
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" name="username" id="username" class="form-control" value=""
+                                   onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Password :
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="password" name="password" id="password" class="form-control" value=""
+                                   onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                                Confirm Password :
+                            </label>
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="password" name="confirm_password" id="confirm_password" class="form-control"
+                                   value=""
+                                   onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);" required="true">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div align="right">
+                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
+                            </label>
+                        </div>
+                        <div class="col-sm-5">
+                            <a class="btn btn-success" href="javascript:goSave();">บันทึก</a>
+                            <a class="btn btn-warning" href="javascript:goClear()">เคลียร์</a>
 
-				<div class="form_row option">
-					<input type="submit" name="submit" value="Create" class="btn create_task" />
-				</div>
-			</form>
-		</div>
+                        </div>
+                    </div>
 
-		<? include('include/footer.php'); ?>
-	</div>
+            </section>
+            <?php include "pageindex.php"; ?>
+        </form>
+    </div>
+</div>
+<!-- ./wrapper -->
 
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.datetimepicker.js"></script>
-	<script>
-	$(function(){
-		$('#datepicker').datetimepicker({
-			datepicker: true,
-			timepicker:false,
-			format: 'Y/m/d'
-		});
-	});
-	</script>
+<!-- jQuery 2.1.4 -->
+<script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<!-- Bootstrap 3.3.5 -->
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<!-- Select2 -->
+<script src="plugins/select2/select2.full.min.js"></script>
+<!-- InputMask -->
+<script src="plugins/input-mask/jquery.inputmask.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="plugins/input-mask/jquery.inputmask.extensions.js"></script>
+<!-- date-range-picker -->
+<script src="plugins/daterangepicker/daterangepicker.js"></script>
+<!-- bootstrap color picker -->
+<script src="plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
+<!-- bootstrap time picker -->
+<script src="plugins/timepicker/bootstrap-timepicker.min.js"></script>
+<!-- SlimScroll 1.3.0 -->
+<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<!-- iCheck 1.0.1 -->
+<script src="plugins/iCheck/icheck.min.js"></script>
+<!-- FastClick -->
+<script src="plugins/fastclick/fastclick.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/app.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<script src="js/screen.js"></script>
+
+<script src="js/jquery.datetimepicker.js"></script>
+<!-- Page script -->
+<script>
+    $(function () {
+        $('#datepicker').datetimepicker({
+            datepicker: true,
+            timepicker: false,
+            format: 'Y/m/d'
+        });
+    });
+    function chk() {
+
+        with (document.form_data) {
+
+            var Rtn = true;
+
+            if (firstname.value == "" || lastname.value == "" || dob.value == "" || username.value == "" || password.value == "" || confirm_password.value == "" || !checkSelection("gender")
+                || !checkSelection("side")) {
+                Rtn = false;
+            }
+            if (!Rtn) {
+                alert('กรุณากรอกข้อมูลให้ครบถ้วน');
+            }
+
+            return Rtn;
+
+        }
+    }
+    function goSave() {
+        with (document.form_data) {
+            if (chk()) {
+                if (confirm_password.value == password.value) {
+
+                    var a = new Date(dob.value);
+                    var b = new Date();
+                    if(fn_DateCompare(a,b) != 1){
+                        __cmd.value = "create";
+                        submit();
+                    }else{
+                        alert("Birth date is more than date Now!!");
+                    }
+
+
+                } else {
+                    alert("รหัสผ่านไม่ตรงกัน กรุณากรอกใหม่!!");
+                    confirm_password.onfocus = true;
+
+                }
+            }
+
+        }
+    }
+
+
+    function checkSelection(field) {
+        var test = document.getElementsByName(field);
+        var sizes = test;
+        for (var i = 0; i < sizes.length; i++) {
+            if (sizes[i].checked == true) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function fn_DateCompare(DateA, DateB) {
+        var a = new Date(DateA);
+        var b = new Date(DateB);
+
+        var msDateA = Date.UTC(a.getFullYear(), a.getMonth()+1, a.getDate());
+        var msDateB = Date.UTC(b.getFullYear(), b.getMonth()+1, b.getDate());
+
+        if (parseFloat(msDateA) < parseFloat(msDateB))
+            return -1;  // less than
+        else if (parseFloat(msDateA) == parseFloat(msDateB))
+            return 0;  // equal
+        else if (parseFloat(msDateA) > parseFloat(msDateB))
+            return 1;  // greater than
+        else
+            return null;  // error
+    }
+
+</script>
 </body>
 </html>
+
+

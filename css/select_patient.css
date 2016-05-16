@@ -1,10 +1,11 @@
 #body .instruction{ text-align: center; font-size: 22px; }
-
-#patient_list{ margin: 30px auto; text-align: center; }
+body{ background: #eee; font-family: 'Open Sans', sans-serif; font-size: 14px; }
+#patient_list{ margin: 0px auto;  text-align: center}
 #patient_list .element{
 	display: inline-block;
 	width: 350px;
-	margin: 20px;
+	margin-top: 15px;
+	margin-right: 5px !important;
 	text-align: left;
 	padding: 0;
 	color: #000;
@@ -52,6 +53,7 @@
 	-webkit-transition: background 0.3s, color 0.2s, border-color 0.3s;
 	transition: background 0.3s, color 0.2s, border-color 0.3s;
 }
+
 #patient_list .patient_stat .label,
 #patient_list .patient_stat .bar,
 #patient_list .patient_stat .stat{

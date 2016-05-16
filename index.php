@@ -1,5 +1,13 @@
 <!--<? include('../include/stcnn.php'); ?>-->
-<?session_start(); ?>
+<?
+session_start();
+
+if($_SESSION['uprofile'] != null){
+	header('Location: select_patient.php');
+	exit();
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>

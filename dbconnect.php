@@ -1,14 +1,24 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "iJoint";
+require_once('classes/MySQLDBConn.class.php');
+$servername = "192.168.0.150";
+$username = "myfriend";
+$password = "System@min";
+$dbname = "ijoint";
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$conn = new MySQLDBConn($servername,$username,$password,$dbname);
 // Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+
+
+function getIsset($post_value){
+    $value="";
+    if(isset($_GET[$post_value])){
+        $value = $_GET[$post_value];
+    }
+    if(isset($_POST[$post_value])){
+        $value = $_POST[$post_value];
+    }
+    return $value;
 }
 
 /*$sql = "SELECT id, username, password FROM admin_user";

@@ -1,15 +1,12 @@
 <?php
-$servername = "localhost";
-$username = "admin";
-$password = "ijoint";
-$dbname = "nuntiyac_ijoint";
+require_once('classes/MySQLDBConn.class.php');
+$servername = "192.168.0.150";
+$username = "myfriend";
+$password = "System@min";
+$dbname = "ijoint";
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
-// Check connection
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$conn = new MySQLDBConn($servername,$username,$password,$dbname);
 
 /*$sql = "SELECT id, username, password FROM admin_user";
 $result = mysqli_query($conn, $sql);

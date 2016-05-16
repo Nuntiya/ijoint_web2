@@ -18,6 +18,7 @@ include('dbconnect.php');#nui
 	<div class="container">
 		<? include('include/header.php'); ?>
 
+
 		<a href="sign_out.php" id="sign_out_btn" class="btn">
 			Sign Out
 		</a>

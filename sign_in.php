@@ -1,19 +1,18 @@
 <?
-#include('../include/stcnn.php');
+session_start();
 include('dbconnect.php');
 
-$username = $_POST['username'];
-$password = md5($_POST['password']);
+
+
+
+$username = getIsset('username');
+$password = md5(getIsset('password'));
 
 $sql = "select * from admin_user where username = '" . $username . "' and password = '" . $password . "'";
-#$sql = "SELECT id, username, password FROM admin_user";
-#$query = mysql_query($sql);
-$query = mysqli_query($conn, $sql);
-$nr = mysqli_num_rows($query);
+$result = $conn->queryRaw($sql,true);
 
-if ($nr > 0){
-	session_start();
-	$_SESSION['admin_user'] = $username;
+if ($result != null){
+	$_SESSION["uprofile"] = $result;
 
 	header('Location: select_patient.php');
 	exit();

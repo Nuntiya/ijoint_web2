@@ -1,130 +1,291 @@
-#patient{
-	width: 350px;
-	margin: 0 auto;
-	padding: 0;
-	color: #000;
-	border: 0;
+#patient {
+    width: 350px;
+    margin: 0 auto;
+    padding: 0;
+    color: #000;
+    border: 0;
 }
-#patient .patient_info{
-	display: table;
-	position: relative;
-	width: 310px;
-	padding: 14px 20px;
-	background: #3f728b;
-	color: #FFF;
-	-webkit-border-top-left-radius: 2px;
-	-webkit-border-top-right-radius: 2px;
-	-moz-border-radius-topleft: 2px;
-	-moz-border-radius-topright: 2px;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	-webkit-transition: background 0.3s, color 0.2s;
-	transition: background 0.3s, color 0.2s;
+
+#patient .patient_info {
+    display: table;
+    position: relative;
+    width: 310px;
+    padding: 14px 20px;
+    background: #3f728b;
+    color: #FFF;
+    -webkit-border-top-left-radius: 2px;
+    -webkit-border-top-right-radius: 2px;
+    -moz-border-radius-topleft: 2px;
+    -moz-border-radius-topright: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    -webkit-transition: background 0.3s, color 0.2s;
+    transition: background 0.3s, color 0.2s;
 }
-#patient .patient_info .patient_gender{ display: table-cell; width: 30px; vertical-align: middle; padding-right: 10px; }
-#patient .patient_info .patient_name{ display: table-cell; vertical-align: middle; font-weight: 700; }
-#patient .patient_info .patient_name .age{
-	font-size: 11px;
-	font-weight: 300;
-	margin-left: 4px;
-	color: #FFF;
-	-webkit-transition: color 0.2s;
-	transition: color 0.2s;
+
+#patient .patient_info .patient_gender {
+    display: table-cell;
+    width: 30px;
+    vertical-align: middle;
+    padding-right: 10px;
 }
-#patient .patient_info .edit_btn{
-	position: absolute;
-	top: -12px;
-	right: -12px;
-	width: 40px;
-	height: 40px;
-	background: url('../images/icon-edit.png') center no-repeat #97BECC;
-	border-radius: 50%;
-	-moz-border-radius: 50%;
-	-webkit-border-radius: 50%;
-	-webkit-transition: background 0.3s;
-	transition: background 0.3s;
+
+#patient .patient_info .patient_name {
+    display: table-cell;
+    vertical-align: middle;
+    font-weight: 700;
 }
-#patient .patient_info .edit_btn:hover{ background-color: #A3CCDB; }
-#patient .patient_stat{
-	width: 310px;
-	display: table;
-	padding: 14px 20px;
-	font-weight: 700;
-	font-size: 12px;
-	border-top: 1px solid #1c4d62;
-	border-bottom: 2px solid #1c4d62;
-	background: #2a5c71;
-	color: #FFF;
-	-webkit-border-bottom-right-radius: 2px;
-	-webkit-border-bottom-left-radius: 2px;
-	-moz-border-radius-bottomright: 2px;
-	-moz-border-radius-bottomleft: 2px;
-	border-bottom-right-radius: 2px;
-	border-bottom-left-radius: 2px;
-	-webkit-transition: background 0.3s, color 0.2s, border-color 0.3s;
-	transition: background 0.3s, color 0.2s, border-color 0.3s;
+
+#patient .patient_info .patient_name .age {
+    font-size: 11px;
+    font-weight: 300;
+    margin-left: 4px;
+    color: #FFF;
+    -webkit-transition: color 0.2s;
+    transition: color 0.2s;
 }
+
+#patient .patient_info .edit_btn {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    width: 40px;
+    height: 40px;
+    background: url('../images/icon-edit.png') center no-repeat #97BECC;
+    border-radius: 50%;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -webkit-transition: background 0.3s;
+    transition: background 0.3s;
+}
+
+#patient .patient_info .edit_btn:hover {
+    background-color: #A3CCDB;
+}
+
+#patient .patient_stat {
+    width: 310px;
+    display: table;
+    padding: 14px 20px;
+    font-weight: 700;
+    font-size: 12px;
+    border-top: 1px solid #1c4d62;
+    border-bottom: 2px solid #1c4d62;
+    background: #2a5c71;
+    color: #FFF;
+    -webkit-border-bottom-right-radius: 2px;
+    -webkit-border-bottom-left-radius: 2px;
+    -moz-border-radius-bottomright: 2px;
+    -moz-border-radius-bottomleft: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    -webkit-transition: background 0.3s, color 0.2s, border-color 0.3s;
+    transition: background 0.3s, color 0.2s, border-color 0.3s;
+}
+
 #patient .patient_stat .label,
 #patient .patient_stat .bar,
-#patient .patient_stat .stat{
-	display: table-cell;
-	vertical-align: middle;
+#patient .patient_stat .stat {
+    display: table-cell;
+    vertical-align: middle;
 }
-#patient .patient_stat .label{ width: 60px; }
-#patient .patient_stat .bar{ text-align: center; }
-#patient .patient_stat .bar .grey_bar{ display: inline-block; width: 160px; background: #CCC; height: 5px; }
-#patient .patient_stat .bar .complete_bar{ background: #8ec614; height: 5px; }
-#patient .patient_stat .stat{ width: 50px; text-align: left; font-size: 18px; }
 
-#change_patient{ text-align: center; margin: 14px auto; }
+#patient .patient_stat .label {
+    width: 60px;
+}
 
-#task{ width: 940px; margin: 0 auto; padding: 0 20px; }
-#task .head{ position: relative; }
-#task .headline{ font-weight: 700; font-size: 36px; }
-#task .sub_headline{ font-weight: 300; font-size: 14px; color: #666; }
-#task .create_task{ position: absolute; bottom: 0; right: 0; background: #8ec614; border-color: #6c9416; }
-#task .create_task:hover{ background: #a9d842; border-color: #8bbc1f; }
-#task .list{
-	margin: 20px 0;
-	background: #FFF;
-	border-bottom: 2px solid #DDD;
-	border-radius: 2px;
-	-moz-border-radius: 2px;
-	-webkit-border-radius: 2px;
+#patient .patient_stat .bar {
+    text-align: center;
 }
-#task .list .element{ display: table; position: relative; width: 900px; padding: 20px; font-weight: 700; }
-#task .list .element:not(:last-child){ border-bottom: 1px solid #DDD; }
-#task .list .element.complete{ background: #f9f9f9; }
-#task .list .element.notask{ font-weight: 300; text-align: center; color: #999; }
-#task .list .element .abf_bg{
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 48px 48px 0 0;
-	border-color: #ffdd00 transparent transparent transparent;
+
+#patient .patient_stat .bar .grey_bar {
+    display: inline-block;
+    width: 160px;
+    background: #CCC;
+    height: 5px;
 }
-#task .list .element .abf{ position: absolute; padding: 6px; top: 0; left: 0; font-weight: 400; font-size: 11px; color: #704c15; }
+
+#patient .patient_stat .bar .complete_bar {
+    background: #8ec614;
+    height: 5px;
+}
+
+#patient .patient_stat .stat {
+    width: 50px;
+    text-align: left;
+    font-size: 18px;
+}
+
+#change_patient {
+    text-align: center;
+    margin: 14px auto;
+}
+
+#task {
+    width: auto;
+    margin: 0 auto;
+    padding: 0 0px;
+}
+
+#task .head {
+    position: relative;
+}
+
+#task .headline {
+    font-weight: 700;
+    font-size: 36px;
+}
+
+#task .sub_headline {
+    font-weight: 300;
+    font-size: 14px;
+    color: #666;
+}
+
+#task .create_task {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #8ec614;
+    border-color: #6c9416;
+}
+
+#task .create_task:hover {
+    background: #a9d842;
+    border-color: #8bbc1f;
+}
+
+#task .list {
+    margin: 20px 0;
+    background: #FFF;
+    border-bottom: 2px solid #DDD;
+    border-radius: 2px;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+}
+
+#task .list .element {
+    display: table;
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    font-weight: 700;
+}
+
+#task .list .element:not(:last-child) {
+    border-bottom: 1px solid #DDD;
+}
+
+#task .list .element.complete {
+    background: #f9f9f9;
+}
+
+#task .list .element.notask {
+    font-weight: 300;
+    text-align: center;
+    color: #999;
+}
+
+#task .list .element .abf_bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 48px 48px 0 0;
+    border-color: #ffdd00 transparent transparent transparent;
+}
+
+#task .list .element .abf {
+    position: absolute;
+    padding: 6px;
+    top: 0;
+    left: 0;
+    font-weight: 400;
+    font-size: 11px;
+    color: #704c15;
+}
 
 #task .list .element .side,
 #task .list .element .target_angle,
 #task .list .element .num_of_round,
-#task .list .element .check{
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	width: 140px;
+#task .list .element .check {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 140px;
 }
-#task .list .element .date{ display: table-cell; vertical-align: middle; width: 120px; font-size: 16px; text-align: center; }
-#task .list .element .date .abf{ font-size: 12px; font-weight: 300; color: #666;}
-#task .list .element .label{ font-weight: 400; font-size: 10px; color: #666; }
-#task .list .element .value{ font-size: 24px; }
-#task .list .element .check img{ display: block; margin: 0 auto; }
-#task .list .element .option{ display: table-cell; vertical-align: middle; text-align: center; font-weight: 400; }
-#task .list .element .option .disabled{ cursor: default; background: #BBB; color: #EEE; border-color: #AAA; }
-#task .list .element .option .result{ background: #333; border-color: #111; }
-#task .list .element .option .result:hover{ background: #777; border-color: #555; }
-#task .list .element .option .del{ background: #de421e; border-color: #b33d22; }
-#task .list .element .option .del:hover{ background: #ed6748; border-color: #cf4f31; }
+
+#task .list .element .date {
+    display: table-cell;
+    vertical-align: middle;
+    width: 120px;
+    font-size: 16px;
+    text-align: center;
+}
+
+#task .list .element .date .abf {
+    font-size: 12px;
+    font-weight: 300;
+    color: #666;
+}
+
+#task .list .element .label {
+    font-weight: 400;
+    font-size: 10px;
+    color: #666;
+}
+
+#task .list .element .value {
+    font-size: 24px;
+}
+
+#task .list .element .check img {
+    display: block;
+    margin: 0 auto;
+}
+
+#task .list .element .option {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-weight: 400;
+}
+
+#task .list .element .option .disabled {
+    cursor: default;
+    background: #BBB;
+    color: #EEE;
+    border-color: #AAA;
+}
+
+#task .list .element .option .result {
+    background: #333;
+    border-color: #111;
+}
+
+#task .list .element .option .result:hover {
+    background: #777;
+    border-color: #555;
+}
+
+#task .list .element .option .del {
+    background: #de421e;
+    border-color: #b33d22;
+}
+
+#task .list .element .option .del:hover {
+    background: #ed6748;
+    border-color: #cf4f31;
+}
+
+.row-option {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.row-option .btn {
+    display: inline;
+}

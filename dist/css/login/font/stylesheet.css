@@ -1,0 +1,7 @@
+@font-face {
+	font-family: 'DB-Helvethaica';
+	src: url('DB-Helvethaica.eot');
+	src: url('DB-Helvethaica.eot?#iefix') format('embedded-opentype'),
+		url('DB-Helvethaica.woff') format('woff'),
+		url('DB-Helvethaica.ttf') format('truetype');
+}
