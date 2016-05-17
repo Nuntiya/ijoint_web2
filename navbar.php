@@ -43,7 +43,7 @@ $full_desc = "Administrator";
                         <li class="user-footer">
 
                             <div class="pull-right">
-                                <a href="sign_out.php" class="btn btn-default btn-flat">ออกจากระบบ</a>
+                                <a href="sign_out.php" class="btn btn-default btn-flat">Sign Out</a>
                             </div>
                         </li>
                     </ul>

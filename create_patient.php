@@ -63,7 +63,7 @@ if ($cmd == "create") {
 
             }
 
-        }else{
+        } else {
             $error = true;
         }
 
@@ -116,140 +116,126 @@ if ($cmd == "create") {
 <div class="wrapper">
     <?php include "navbar.php" ?>
     <?php include "sidebar.php" ?>
+
     <div class="content-wrapper  skin-blue ">
-        <form id="form_data" name="form_data" method="post" action="create_patient.php">
+        <form id="form_data" name="form_data" method="post" action="create_patient.php" class="form-horizontal">
 
             <input id="__cmd" name="__cmd" type="hidden" value="">
 
+
+            <section class="content-header">
+                <h1>
+                    Create Patient
+                </h1>
+            </section>
             <section class="content">
-                <div class="clr"></div>
-                <div class="col-sm-1"></div>
-                <div class="col-sm-10">
-                    <div class="col-md-12">
-                        <h3 class="box-title">Create New Patient</h3>
-                    </div>
 
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                First Name :
-                            </label>
+                <div class="col-sm-6">
+
+                    <div class="box box-info">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Create New Patient</h3>
                         </div>
-                        <div class="col-sm-3">
 
+                        <div class="box-body">
+                            <div class="form-group">
 
-                            <input type="text" name="firstname" id="firstname" class="form-control" value=""
-                                   required="true">
+                                <label for="inputPassword3" class="col-sm-3 control-label">First Name :</label>
+
+                                <div class="col-sm-9">
 
 
-                        </div>
-                    </div>
+                                    <input type="text" name="firstname" id="firstname" class="form-control" value=""
+                                           required="true">
 
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Last Name :
-                            </label>
-                        </div>
-                        <div class="col-sm-3">
-                            <input type="text" name="lastname" id="lastname" class="form-control" value=""
-                                   onblur="trimValue(this);" required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                E-mail :
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" name="email" id="email" class="form-control" value=""
-                                   onblur="trimValue(this);chkEmail(this);" required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Date of Birth :
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" name="dob" id="datepicker" class="form-control"
-                                   value=""
-                                   onblur="trimValue(this);" required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Gender :
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
 
-                            <label class="radio-inline"><input type="radio" name="gender" id="male"
-                                                               value="m">Male</label>
-                            <label class="radio-inline"><input type="radio" name="gender" id="female"
-                                                               value="f">Female</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                    <label for="inputPassword3" class="col-sm-3 control-label"> Last Name :</label>
+
+
+                                <div class="col-sm-9">
+                                    <input type="text" name="lastname" id="lastname" class="form-control" value=""
+                                           onblur="trimValue(this);" required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">  E-mail :</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" name="email" id="email" class="form-control" value=""
+                                           onblur="trimValue(this);chkEmail(this);" required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Date of Birth :</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" name="dob" id="datepicker" class="form-control"
+                                           value=""
+                                           onblur="trimValue(this);" required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Gender :</label>
+
+                                <div class="col-sm-9">
+
+                                    <label class="radio-inline"><input type="radio" name="gender" id="male"
+                                                                       value="m">Male</label>
+                                    <label class="radio-inline"><input type="radio" name="gender" id="female"
+                                                                       value="f">Female</label>
+
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Side :</label>
+
+                                <div class="col-sm-9">
+                                    <label class="radio-inline"><input type="radio" name="side" id="side_l"
+                                                                       value="l">Left</label>
+                                    <label class="radio-inline"><input type="radio" name="side" id="side_r"
+                                                                       value="r">Right</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Username :</label>
+
+                                <div class="col-sm-9">
+                                    <input type="text" name="username" id="username" class="form-control" value=""
+                                           onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);"
+                                           required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Password :</label>
+
+                                <div class="col-sm-9">
+                                    <input type="password" name="password" id="password" class="form-control" value=""
+                                           onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);"
+                                           required="true">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Confirm Password :</label>
+
+                                <div class="col-sm-9">
+                                    <input type="password" name="confirm_password" id="confirm_password"
+                                           class="form-control"
+                                           value=""
+                                           onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);"
+                                           required="true">
+                                </div>
+                            </div>
 
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Side :
-                            </label>
-                        </div>
-                        <div class="col-sm-3">
-                            <label class="radio-inline"><input type="radio" name="side" id="side_l"
-                                                               value="l">Left</label>
-                            <label class="radio-inline"><input type="radio" name="side" id="side_r"
-                                                               value="r">Right</label>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Username :
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="text" name="username" id="username" class="form-control" value=""
-                                   onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);" required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Password :
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="password" name="password" id="password" class="form-control" value=""
-                                   onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);" required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                Confirm Password :
-                            </label>
-                        </div>
-                        <div class="col-sm-2">
-                            <input type="password" name="confirm_password" id="confirm_password" class="form-control"
-                                   value=""
-                                   onblur="trimValue(this);" onkeypress="chkNotThaiChaOnly(event);" required="true">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div align="right">
-                            <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                            </label>
-                        </div>
-                        <div class="col-sm-5">
-                            <a class="btn btn-success" href="javascript:goSave();">บันทึก</a>
-                            <a class="btn btn-warning" href="javascript:goClear()">เคลียร์</a>
+                        <div class="box-footer">
 
+                            <a class="btn btn-warning " href="javascript:goClear()">Clear</a>
+                            <a class="btn btn-info pull-right" href="javascript:goSave();">Create</a>
                         </div>
                     </div>
 
@@ -323,10 +309,10 @@ if ($cmd == "create") {
 
                     var a = new Date(dob.value);
                     var b = new Date();
-                    if(fn_DateCompare(a,b) != 1){
+                    if (fn_DateCompare(a, b) != 1) {
                         __cmd.value = "create";
                         submit();
-                    }else{
+                    } else {
                         alert("Birth date is more than date Now!!");
                     }
 
@@ -358,8 +344,8 @@ if ($cmd == "create") {
         var a = new Date(DateA);
         var b = new Date(DateB);
 
-        var msDateA = Date.UTC(a.getFullYear(), a.getMonth()+1, a.getDate());
-        var msDateB = Date.UTC(b.getFullYear(), b.getMonth()+1, b.getDate());
+        var msDateA = Date.UTC(a.getFullYear(), a.getMonth() + 1, a.getDate());
+        var msDateB = Date.UTC(b.getFullYear(), b.getMonth() + 1, b.getDate());
 
         if (parseFloat(msDateA) < parseFloat(msDateB))
             return -1;  // less than

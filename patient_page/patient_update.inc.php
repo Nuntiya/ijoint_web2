@@ -68,12 +68,8 @@ $select = $conn->select("patient", array('pid' => $id), true);
                     <input id="__id" name="__id" type="hidden" value="<?php echo $id; ?>">
                     <div class="box-body">
                         <div class="form-group">
-                            <div align="right">
-                                <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                    First Name :
-                                </label>
-                            </div>
-                            <div class="col-sm-3">
+                            <label for="inputPassword3" class="col-sm-3 control-label">First Name :</label>
+                            <div class="col-sm-9">
 
 
                                 <input type="text" name="firstname" id="firstname" class="form-control"
@@ -85,48 +81,35 @@ $select = $conn->select("patient", array('pid' => $id), true);
                         </div>
 
                         <div class="form-group">
-                            <div align="right">
-                                <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                    Last Name :
-                                </label>
-                            </div>
-                            <div class="col-sm-3">
+                            <label for="inputPassword3" class="col-sm-3 control-label"> Last Name :</label>
+                            <div class="col-sm-9">
                                 <input type="text" name="lastname" id="lastname" class="form-control"
                                        value="<?php echo $select["lastname"]; ?>"
                                        onblur="trimValue(this);" required="true">
                             </div>
                         </div>
                         <div class="form-group">
-                            <div align="right">
-                                <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                    E-mail :
-                                </label>
-                            </div>
-                            <div class="col-sm-2">
+
+                                <label for="inputPassword3" class="col-sm-3 control-label">  E-mail :</label>
+                            <div class="col-sm-9">
                                 <input type="text" name="email" id="email" class="form-control"
                                        value="<?php echo $select["email"]; ?>"
-                                       onblur="trimValue(this);chkEmail(this);" required="true">
+                                       onblur="trimValue(this);chkEmail(this);" >
                             </div>
                         </div>
+
+                            <div class="form-group">
+                                <label for="inputPassword3" class="col-sm-3 control-label">   Date of Birth :</label>
+                                <div class="col-sm-9">
+                                    <input type="text" name="dob" id="datepicker" class="form-control"
+                                           value="<?php echo date('Y/m/d',strtotime($select["dob"])); ?>"
+                                           required="true">
+                                </div>
+                            </div>
+
                         <div class="form-group">
-                            <div align="right">
-                                <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                    Date of Birth :
-                                </label>
-                            </div>
-                            <div class="col-sm-2">
-                                <input type="text" name="dob" id="datepicker" class="form-control"
-                                       value="<?php echo date('Y/m/d',strtotime($select["dob"])); ?>"
-                                       required="true">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div align="right">
-                                <label style="margin-right:10px;padding:5px 0px;" class="col-sm-2">
-                                    Gender :
-                                </label>
-                            </div>
-                            <div class="col-sm-4">
+                            <label for="inputPassword3" class="col-sm-3 control-label">   Gender :</label>
+                            <div class="col-sm-9">
 
                                 <label class="radio-inline"><input type="radio" name="gender" id="male"
                                                                    value="m" <? if ($select["gender"] == "m") {
