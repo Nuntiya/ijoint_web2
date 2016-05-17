@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "admin";
-$password = "";
+$password = "ijoint";
 $dbname = "nuntiyac_ijoint";
 
 // Create connection
